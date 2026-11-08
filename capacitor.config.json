@@ -1,0 +1,3 @@
+{"appId":"com.smfx.assistant","appName":"Assistant","webDir":"www",
+"server":{"androidScheme":"https","cleartext":true},
+"plugins":{"CapacitorHttp":{"enabled":true}}}
