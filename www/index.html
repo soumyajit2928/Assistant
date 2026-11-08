@@ -3,49 +3,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#212121"><title>Assistant</title>
 <style>
-:root{--bg:#fff;--side:#f9f9f9;--bub:#f4f4f4;--tx:#0d0d0d;--mu:#6b6b6b;--bd:#e3e3e3;--ac:#0d0d0d;--ac2:#fff;box-sizing:border-box}
-@media(prefers-color-scheme:dark){:root{--bg:#212121;--side:#171717;--bub:#2f2f2f;--tx:#ececec;--mu:#9b9b9b;--bd:#3a3a3a;--ac:#ececec;--ac2:#212121}}
-*{box-sizing:border-box}html,body{height:100%;margin:0}
-body{background:var(--bg);color:var(--tx);font:16px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif;display:flex;overflow:hidden;padding-top:env(safe-area-inset-top,0)}
+:root{--tx:#0b0b12;--mu:#5d6070;--gl:rgba(255,255,255,.5);--gl2:rgba(255,255,255,.4);--bd:rgba(255,255,255,.75);--sh:0 8px 32px rgba(40,50,90,.16);--ac:#0a84ff;--ac2:#fff;--bub:rgba(255,255,255,.55);--bg:#dde6f6;--o1:#7aa8ff;--o2:#d79bff;--o3:#7ee8d6;box-sizing:border-box}
+@media(prefers-color-scheme:dark){:root{--tx:#f3f4f8;--mu:#a2a6b8;--gl:rgba(40,42,62,.5);--gl2:rgba(60,64,92,.32);--bd:rgba(255,255,255,.14);--sh:0 8px 32px rgba(0,0,0,.45);--bub:rgba(255,255,255,.1);--bg:#0b0c14;--o1:#2f5bff;--o2:#8a3ffc;--o3:#0aa59a}}
+*{box-sizing:border-box}html,body{height:100%;margin:0}html{background:var(--bg)}
+body{color:var(--tx);font:16px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;display:flex;overflow:hidden;padding-top:env(safe-area-inset-top,0)}
+body::before{content:"";position:fixed;inset:-15%;z-index:-1;opacity:.8;background:radial-gradient(circle at 18% 15%,var(--o1) 0,transparent 42%),radial-gradient(circle at 85% 30%,var(--o2) 0,transparent 40%),radial-gradient(circle at 40% 92%,var(--o3) 0,transparent 42%);animation:d 20s ease-in-out infinite alternate}
+@keyframes d{to{transform:translate(4%,3%) scale(1.1)}}@media(prefers-reduced-motion:reduce){body::before{animation:none}}
+#side,header,#box,dialog,.m.a .b,.chip{background:var(--gl);-webkit-backdrop-filter:blur(26px) saturate(180%);backdrop-filter:blur(26px) saturate(180%);border:1px solid var(--bd);box-shadow:var(--sh),inset 0 1px 0 rgba(255,255,255,.3)}
 button,input,select,textarea{font:inherit;color:inherit}
-#side{width:270px;background:var(--side);display:flex;flex-direction:column;padding:10px;gap:6px;transition:transform .2s;z-index:5}
+#side{width:272px;margin:10px 0 10px 10px;border-radius:26px;display:flex;flex-direction:column;padding:10px;gap:4px;z-index:5;transition:transform .25s}
 #side .list{flex:1;overflow:auto}
-.it{padding:9px 10px;border-radius:10px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;justify-content:space-between;gap:8px}
+.it{padding:9px 12px;border-radius:14px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;justify-content:space-between;gap:8px}
 .it:hover,.it.on{background:var(--bub)}.it b{font-weight:400;opacity:.5}
-.btn{border:0;background:none;padding:9px 10px;border-radius:10px;cursor:pointer;text-align:left}.btn:hover{background:var(--bub)}
+.btn{border:0;background:none;padding:10px 12px;border-radius:14px;cursor:pointer;text-align:left}.btn:hover{background:var(--bub)}
 #main{flex:1;display:flex;flex-direction:column;min-width:0;height:100%}
-header{display:flex;align-items:center;gap:8px;padding:8px 12px}
+header{display:flex;align-items:center;gap:8px;margin:10px 10px 0;padding:5px 8px;border-radius:22px}
 header .t{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #menu{display:none}
 #msgs{flex:1;overflow:auto;padding:8px 14px}
 .w{max-width:760px;margin:0 auto}
 .m{margin:14px 0;display:flex}.m.u{justify-content:flex-end}
 .m .b{max-width:88%;overflow-wrap:anywhere}
-.m.u .b{background:var(--bub);padding:9px 15px;border-radius:20px;white-space:pre-wrap}
-.m.a .b{max-width:100%}
-.b pre{background:#0d0d0d;color:#ececec;padding:12px;border-radius:12px;overflow:auto;font-size:13px}
+.m.u .b{background:linear-gradient(135deg,#0a84ff,#5e5ce6);color:#fff;padding:9px 16px;border-radius:22px 22px 8px 22px;white-space:pre-wrap;box-shadow:0 4px 16px rgba(10,132,255,.35)}
+.m.a .b{max-width:94%;padding:8px 16px;border-radius:22px 22px 22px 8px}
+.b pre{background:rgba(10,10,20,.75);color:#ececec;padding:12px;border-radius:14px;overflow:auto;font-size:13px}
 .b code{font-family:ui-monospace,Menlo,monospace;font-size:.9em}.b p{margin:.5em 0}
-.b :not(pre)>code{background:var(--bub);padding:1px 5px;border-radius:5px}
-.chip{display:inline-flex;gap:6px;align-items:center;background:var(--bub);border:1px solid var(--bd);border-radius:10px;padding:4px 9px;font-size:13px;margin:0 6px 6px 0}
-.chip img{width:34px;height:34px;object-fit:cover;border-radius:6px}.chip i{cursor:pointer;font-style:normal;opacity:.6}
-.m img.p{max-width:200px;border-radius:12px;display:block;margin-bottom:6px}
-#empty{text-align:center;margin-top:18vh;color:var(--mu)}#empty h2{color:var(--tx);font-weight:600;margin:0 0 6px}
-footer{padding:8px 12px calc(10px + env(safe-area-inset-bottom,0))}
-#box{max-width:760px;margin:0 auto;background:var(--bub);border-radius:26px;padding:8px 8px 8px 12px}
+.b :not(pre)>code{background:var(--bub);padding:1px 6px;border-radius:6px}
+.chip{display:inline-flex;gap:6px;align-items:center;border-radius:12px;padding:4px 10px;font-size:13px;margin:0 6px 6px 0}
+.chip img{width:34px;height:34px;object-fit:cover;border-radius:8px}.chip i{cursor:pointer;font-style:normal;opacity:.6}
+.m img.p{max-width:200px;border-radius:14px;display:block;margin-bottom:6px}
+#empty{text-align:center;margin-top:18vh;color:var(--mu)}#empty h2{color:var(--tx);font-weight:700;font-size:28px;margin:0 0 6px}
+footer{padding:8px 10px calc(10px + env(safe-area-inset-bottom,0))}
+#box{max-width:760px;margin:0 auto;border-radius:30px;padding:8px 8px 8px 12px}
 #chips{padding:2px 4px}
 .row{display:flex;align-items:flex-end;gap:6px}
 textarea{flex:1;border:0;background:none;resize:none;outline:0;max-height:160px;padding:7px 2px;font-size:16px}
-.ic{width:36px;height:36px;border-radius:50%;border:0;background:none;cursor:pointer;font-size:20px;flex:none}
-#send{background:var(--ac);color:var(--ac2)}#send:disabled{opacity:.3}
-dialog{border:1px solid var(--bd);border-radius:18px;background:var(--bg);color:var(--tx);width:min(440px,92vw);padding:18px}
-dialog::backdrop{background:#0008}
+.ic{width:38px;height:38px;border-radius:50%;border:0;background:var(--bub);cursor:pointer;font-size:20px;flex:none}
+#send{background:var(--ac);color:var(--ac2);box-shadow:0 4px 14px rgba(10,132,255,.45)}#send:disabled{opacity:.3}
+dialog{color:var(--tx);border-radius:28px;width:min(440px,92vw);max-height:86vh;overflow:auto;padding:20px;-webkit-backdrop-filter:blur(40px) saturate(200%);backdrop-filter:blur(40px) saturate(200%)}
+dialog::backdrop{background:rgba(10,10,30,.35);backdrop-filter:blur(4px)}
 label{display:block;font-size:13px;color:var(--mu);margin:12px 0 4px}
-dialog input,dialog select,dialog textarea{width:100%;border:1px solid var(--bd);background:var(--side);border-radius:10px;padding:9px;font-size:16px}
-dialog textarea{height:90px;max-height:none}
-.err{color:#d33}.dots{color:var(--mu)}
-@media(max-width:760px){#menu{display:block}#side{position:fixed;inset:0 auto 0 0;transform:translateX(-100%);padding-top:calc(10px + env(safe-area-inset-top,0))}body.open #side{transform:none;box-shadow:0 0 0 100vw #0006}}
+dialog input,dialog select,dialog textarea{width:100%;border:1px solid var(--bd);background:var(--bub);border-radius:14px;padding:10px;font-size:16px;margin-top:6px}
+dialog textarea{height:72px;max-height:none}
+.acts{display:flex;gap:6px;margin-top:14px;justify-content:flex-end;flex-wrap:wrap}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--bd)}
+.prow small{display:block;color:var(--mu);line-height:1.3}.prow span{display:flex;align-items:center;flex:none}.prow i{cursor:pointer;font-style:normal;margin-right:12px;opacity:.6}
+dialog input.sw{appearance:none;-webkit-appearance:none;width:46px;height:28px;padding:0;margin:0;border-radius:14px;position:relative;cursor:pointer;flex:none}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px #0004}
+.sw:checked{background:#30d158!important}.sw:checked::after{transform:translateX(18px)}
+.err{color:#ff453a}.dots{color:var(--mu)}
+@media(max-width:760px){#menu{display:block}#side{position:fixed;top:calc(10px + env(safe-area-inset-top,0));bottom:10px;left:10px;margin:0;transform:translateX(-120%)}body.open #side{transform:none;box-shadow:0 0 0 100vw rgba(0,0,0,.35)}}
 </style></head><body>
-<aside id="side"><button class="btn" id="new">＋ New chat</button><div class="list" id="list"></div><button class="btn" id="set">⚙ Settings</button></aside>
+<aside id="side"><button class="btn" id="new">＋ New chat</button><div class="list" id="list"></div><button class="btn" id="plg">🧩 Plugins</button><button class="btn" id="set">⚙ Settings</button></aside>
 <div id="main">
 <header><button class="ic" id="menu">☰</button><div class="t" id="title">Assistant</div></header>
 <div id="msgs"><div class="w" id="log"></div></div>
@@ -63,6 +72,11 @@ dialog textarea{height:90px;max-height:none}
 <label>Your name</label><input id="uname">
 <label>How should the assistant behave?</label><textarea id="sys" placeholder="Tone, expertise, things to remember about you"></textarea>
 <div style="display:flex;gap:8px;margin-top:14px;justify-content:flex-end"><button class="btn" id="x">Cancel</button><button class="btn" id="ok" style="background:var(--ac);color:var(--ac2)">Save</button></div></dialog>
+<dialog id="pdlg"><b>Plugins</b><div id="plist"></div>
+<label>Add a plugin</label><select id="ptype"><option value="tool">Tool (calls an API)</option><option value="prompt">Skill (extra instructions)</option></select>
+<input id="pname" placeholder="Name, e.g. weather"><textarea id="pdesc" placeholder="Tool: what it does. Skill: the instructions."></textarea>
+<div id="ptool"><input id="purl" placeholder="URL with {params}, e.g. https://wttr.in/{city}?format=3"><select id="pmeth"><option>GET</option><option>POST</option></select><textarea id="phead" placeholder="Headers, one per line (Authorization: Bearer KEY)"></textarea><textarea id="pbody" placeholder="POST body template (optional)"></textarea></div>
+<div class="acts"><button class="btn" id="padd">Add</button><button class="btn" id="pexp">Copy JSON</button><button class="btn" id="pimp">Import</button><button class="btn" id="pclose" style="background:var(--ac);color:var(--ac2)">Done</button></div></dialog>
 <script>
 const $=id=>document.getElementById(id);
 const DEF={openai:{m:"gpt-4o",b:"https://api.openai.com/v1"},anthropic:{m:"claude-sonnet-4-5",b:""},google:{m:"gemini-2.5-flash",b:""},nvidia:{m:"meta/llama-3.3-70b-instruct",b:"https://integrate.api.nvidia.com/v1"},local:{m:"llama3.2",b:"http://localhost:11434/v1"}};
@@ -74,7 +88,7 @@ function md(t){const parts=t.split(/```/);return parts.map((p,i)=>{if(i%2){retur
 return esc(p).replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>").split(/\n{2,}/).map(x=>"<p>"+x.replace(/\n/g,"<br>")+"</p>").join("")}).join("")}
 function render(){const c=chats.find(x=>x.id===cur);$("title").textContent=c?c.title:"Assistant";const L=$("log");
 if(!c||!c.msgs.length){L.innerHTML='<div id="empty"><h2>'+(cfg.name?"Hi "+esc(cfg.name):"How can I help?")+'</h2>'+(cfg.keys[cfg.prov]||cfg.prov==="local"?"Ask anything or attach a file.":"Open Settings and add an API key to start.")+'</div>'}
-else L.innerHTML=c.msgs.map(m=>'<div class="m '+(m.role==="user"?"u":"a")+'"><div class="b">'+(m.imgs||[]).map(i=>'<img class="p" src="'+i+'">').join("")+(m.files||[]).map(f=>'<span class="chip">📄 '+esc(f)+'</span>').join("")+(m.role==="user"?esc(m.text):md(m.text))+'</div></div>').join("");
+else L.innerHTML=c.msgs.filter(m=>!m.hidden).map(m=>m.tool?'<div class="m a"><span class="chip">🧩 Used '+esc(m.tool)+'</span></div>':'<div class="m '+(m.role==="user"?"u":"a")+'"><div class="b">'+(m.imgs||[]).map(i=>'<img class="p" src="'+i+'">').join("")+(m.files||[]).map(f=>'<span class="chip">📄 '+esc(f)+'</span>').join("")+(m.role==="user"?esc(m.text):md(m.text))+'</div></div>').join("");
 $("msgs").scrollTop=1e9;
 $("list").innerHTML=chats.map(x=>'<div class="it'+(x.id===cur?" on":"")+'" data-id="'+x.id+'"><span>'+esc(x.title)+'</span><b data-del="'+x.id+'">✕</b></div>').join("")}
 $("list").onclick=e=>{const d=e.target.dataset.del;if(d){chats=chats.filter(x=>x.id!==d);if(cur===d)cur=null;save()}else{const it=e.target.closest(".it");if(it)cur=it.dataset.id}document.body.classList.remove("open");render()};
@@ -98,18 +112,47 @@ const t=await f.text();if(/\u0000/.test(t.slice(0,2000)))throw new Error("unsupp
 const ctx=m=>m.text+(m.docs||[]).map(d=>"\n\n--- File: "+d.name+" ---\n"+d.text.slice(0,60000)).join("");
 const b64=u=>({mt:u.slice(5,u.indexOf(";")),d:u.split(",")[1]});
 async function ask(msgs){const p=cfg.prov,key=cfg.keys[p]||"",model=cfg.models[p]||DEF[p].m,base=(cfg.bases[p]||DEF[p].b).replace(/\/$/,"");
-const sys=("You are a personal assistant."+(cfg.name?" The user's name is "+cfg.name+".":"")+" "+cfg.sys).trim();let r,j;
+const sys=("You are a personal assistant."+(cfg.name?" The user's name is "+cfg.name+".":"")+" "+cfg.sys+toolPrompt()).trim();let r,j;
 if(p==="anthropic"){r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"content-type":"application/json","x-api-key":key,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model,max_tokens:4096,system:sys,messages:msgs.map(m=>({role:m.role,content:[...(m.imgs||[]).map(i=>{const x=b64(i);return{type:"image",source:{type:"base64",media_type:x.mt,data:x.d}}}),{type:"text",text:ctx(m)}]}))})});j=await r.json();if(!r.ok)throw new Error(j.error?.message||r.status);return j.content.map(c=>c.text||"").join("")}
 if(p==="google"){r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent?key="+key,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({systemInstruction:{parts:[{text:sys}]},contents:msgs.map(m=>({role:m.role==="user"?"user":"model",parts:[...(m.imgs||[]).map(i=>{const x=b64(i);return{inlineData:{mimeType:x.mt,data:x.d}}}),{text:ctx(m)}]}))})});j=await r.json();if(!r.ok)throw new Error(j.error?.message||r.status);return j.candidates?.[0]?.content?.parts?.map(x=>x.text).join("")||"(no reply)"}
 r=await fetch(base+"/chat/completions",{method:"POST",headers:{"content-type":"application/json",...(key?{authorization:"Bearer "+key}:{})},body:JSON.stringify({model,messages:[{role:"system",content:sys},...msgs.map(m=>({role:m.role,content:m.imgs?.length?[...m.imgs.map(i=>({type:"image_url",image_url:{url:i}})),{type:"text",text:ctx(m)}]:ctx(m)}))]})});
 j=await r.json();if(!r.ok)throw new Error(j.error?.message||j.detail||r.status);return j.choices[0].message.content}
+const BI=[{name:"datetime",desc:"Get the current date and time",args:[],fn:()=>new Date().toString()},
+{name:"calculator",desc:"Evaluate a math expression",args:["expression"],fn:a=>{if(!/^[\d+\-*/().%\s]+$/.test(a.expression||""))throw new Error("invalid expression");return String(Function('"use strict";return ('+a.expression+')')())}},
+{name:"web_fetch",desc:"Fetch a web page and return its text",args:["url"],fn:async a=>{const r=await fetch(a.url);return (await r.text()).replace(/<(script|style)[\s\S]*?<\/\1>/gi,"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").slice(0,8000)}}];
+const ph=s=>[...new Set([...(s||"").matchAll(/\{(\w+)\}/g)].map(m=>m[1]))];
+function tools(){cfg.plugins=cfg.plugins||[];cfg.off=cfg.off||{};
+return[...BI.filter(b=>!cfg.off[b.name]),...cfg.plugins.filter(p=>p.type==="tool"&&p.on!==false).map(p=>({name:p.name,desc:p.desc,args:ph((p.url||"")+(p.body||"")),user:p}))]}
+function toolPrompt(){const t=tools(),pr=cfg.plugins.filter(p=>p.type==="prompt"&&p.on!==false);let s="";
+pr.forEach(p=>s+="\n\n["+p.name+"] "+p.desc);
+if(t.length)s+='\n\nYou can use tools. To call one, reply with ONLY a fenced block and nothing else:\n```tool\n{"name":"<tool>","args":{...}}\n```\nThen wait for the result. Tools:\n'+t.map(x=>"- "+x.name+"("+x.args.join(", ")+"): "+x.desc).join("\n");return s}
+async function runTool(t,a){if(t.fn)return t.fn(a);const p=t.user;if(p.method!=="GET"&&!confirm("Allow plugin '"+p.name+"' to send data?"))return "User declined.";
+const f=(s,e)=>(s||"").replace(/\{(\w+)\}/g,(_,k)=>e?encodeURIComponent(a[k]??""):(a[k]??""));const h={};
+(p.headers||"").split("\n").forEach(l=>{const i=l.indexOf(":");if(i>0)h[l.slice(0,i).trim()]=l.slice(i+1).trim()});
+const r=await fetch(f(p.url,1),{method:p.method,headers:h,body:p.method==="GET"?undefined:f(p.body)});const x=await r.text();if(!r.ok)throw new Error(r.status+" "+x.slice(0,200));return x.slice(0,8000)}
+async function run(c){for(let i=0;i<4;i++){const t=await ask(c.msgs),m=/```tool\s*([\s\S]*?)```/.exec(t);let call=null;try{call=m&&JSON.parse(m[1])}catch(e){}
+const pl=call&&tools().find(x=>x.name===call.name);if(!pl){c.msgs.push({role:"assistant",text:t});return}
+c.msgs.push({role:"assistant",text:t,tool:pl.name});render();let out;try{out=await runTool(pl,call.args||{})}catch(e){out="Error: "+e.message}
+c.msgs.push({role:"user",text:"Tool result for "+pl.name+":\n"+String(out).slice(0,8000),hidden:true})}
+c.msgs.push({role:"assistant",text:"(Stopped after too many tool calls.)"})}
+const row=(n,d,on,k,del)=>'<div class="prow"><div><b>'+esc(n)+'</b><small>'+esc(d.slice(0,80))+'</small></div><span>'+(del?'<i data-d="'+k+'">✕</i>':"")+'<input type="checkbox" class="sw" data-k="'+k+'"'+(on?" checked":"")+'></span></div>';
+function plist(){tools();$("plist").innerHTML=BI.map(b=>row(b.name,b.desc,!cfg.off[b.name],"b:"+b.name)).concat(cfg.plugins.map((p,i)=>row(p.name,(p.type==="tool"?"Tool · ":"Skill · ")+p.desc,p.on!==false,"p:"+i,1))).join("")}
+$("plist").onclick=e=>{const t=e.target;if(t.dataset.d){cfg.plugins.splice(+t.dataset.d.slice(2),1)}else if(t.dataset.k){const[a,b]=t.dataset.k.split(":");if(a==="b")cfg.off[b]=!t.checked;else cfg.plugins[+b].on=t.checked}else return;save();plist()};
+$("padd").onclick=()=>{const n=$("pname").value.trim().replace(/\W+/g,"_"),t=$("ptype").value,d=$("pdesc").value.trim();if(!n||!d)return;tools();
+cfg.plugins.push(t==="tool"?{type:t,name:n,desc:d,url:$("purl").value.trim(),method:$("pmeth").value,headers:$("phead").value,body:$("pbody").value,on:true}:{type:t,name:n,desc:d,on:true});
+["pname","pdesc","purl","phead","pbody"].forEach(i=>$(i).value="");save();plist()};
+$("ptype").onchange=()=>$("ptool").hidden=$("ptype").value!=="tool";
+$("plg").onclick=()=>{document.body.classList.remove("open");plist();$("pdlg").showModal()};
+$("pclose").onclick=()=>$("pdlg").close();
+$("pexp").onclick=()=>{tools();navigator.clipboard&&navigator.clipboard.writeText(JSON.stringify(cfg.plugins,null,1))};
+$("pimp").onclick=()=>{try{const j=JSON.parse(prompt("Paste plugin JSON")||"null");tools();[].concat(j||[]).forEach(p=>p&&p.name&&p.type&&cfg.plugins.push({...p,on:true}));save();plist()}catch(e){alert("Invalid JSON")}};
 async function send(){const t=$("in").value.trim();if((!t&&!pend.length)||busy)return;
 if(!cfg.keys[cfg.prov]&&cfg.prov!=="local"){openSet();return}
 let c=chats.find(x=>x.id===cur);if(!c){c={id:""+Date.now(),title:(t||pend[0].name).slice(0,40),msgs:[]};chats.unshift(c);cur=c.id}
 c.msgs.push({role:"user",text:t,imgs:pend.filter(p=>p.img).map(p=>p.img),docs:pend.filter(p=>p.text!=null).map(p=>({name:p.name,text:p.text})),files:pend.filter(p=>p.text!=null).map(p=>p.name)});
 pend=[];chips();$("in").value="";$("in").style.height="auto";busy=true;render();
 const L=$("log");L.insertAdjacentHTML("beforeend",'<div class="m a"><div class="b dots" id="wait">Thinking…</div></div>');$("msgs").scrollTop=1e9;
-try{c.msgs.push({role:"assistant",text:await ask(c.msgs)})}catch(e){c.msgs.push({role:"assistant",text:"Error: "+e.message+(/fetch/i.test(e.message)?"\n\nCheck your connection. Some providers block browser requests (CORS); local servers need CORS enabled.":"")})}
+try{await run(c)}catch(e){c.msgs.push({role:"assistant",text:"Error: "+e.message+(/fetch/i.test(e.message)?"\n\nCheck your connection. Some providers block browser requests (CORS); local servers need CORS enabled.":"")})}
 busy=false;save();render()}
 $("send").onclick=send;
 $("in").onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey&&innerWidth>760){e.preventDefault();send()}};
